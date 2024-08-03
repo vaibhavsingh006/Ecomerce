@@ -1,39 +1,49 @@
 <%- include('./partials/header') %>
-    <div class="w-full h-screen flex items-start pl-20 py-20">
-        <div class="w-[25%] flex h-screen flex-col items-start">
-            <div class="flex flex-col">
-                <a class="block w-fit mb-2" href="">All Products</a>
-                <a class="block text-red-600 w-fit mb-2" href="/logout">Logout</a>
-                <!-- <a class="block w-fit mb-2" href="">Create new product</a> -->
-            </div>
-        </div>
-        <div class="w-[75%] flex flex-col gap-5 h-screen">
-            <!-- <a class="text-red-500" href="">Delete all</a> -->
-            <div class="flex items-start flex-wrap gap-5">
-                <% products.forEach(function(product){ %>
-                    <div class="w-[13rem] bg-[<%= product.bgcolor %>]">
-                        <div class="w-full h-52 flex items-center justify-center">
-                            <img class="h-[12rem] w-auto object-contain "
-                                src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
-                                alt="<%= product.name %>">
-                        </div>
-                        <div
-                            class="flex justify-between items-center px-4 py-4 text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
-                            <div>
-                                <h3>
-                                    <%= product.name %>
-                                </h3>
-                                <h4>₹ <%= product.price %>
-                                </h4>
-                            </div>
-                            <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                                <i class="ri-add-line"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <% }) %>
 
-            </div>
+    <% if(success.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= success %>
+            </span>
         </div>
-    </div>
-    <%- include('./partials/footer') %>
+        <% } %>
+
+            <div class="w-full h-screen flex items-start pl-20 py-20">
+                <div class="w-[25%] flex h-screen flex-col items-start">
+                    <div class="flex flex-col">
+                        <a class="block w-fit mb-2" href="">All Products</a>
+                        <a class="block text-red-600 w-fit mb-2" href="/logout">Logout</a>
+                        <a class="block w-fit mb-2" href="/owner/admin">Create new product</a>
+                    </div>
+                </div>
+                <div class="w-[75%] flex flex-col gap-5 h-screen">
+                    <!-- <a class="text-red-500" href="">Delete all</a> -->
+                    <div class="flex items-start flex-wrap gap-5">
+                        <% products.forEach(function(product){ %>
+                            <div class="w-[13rem] bg-[<%= product.bgcolor %>]">
+                                <div class="w-full h-52 flex items-center justify-center">
+                                    <img class="h-[12rem] w-auto object-contain "
+                                        src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                                        alt="<%= product.name %>">
+                                </div>
+                                <div
+                                    class="flex justify-between items-center px-4 py-4 text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
+                                    <div>
+                                        <h3>
+                                            <%= product.name %>
+                                        </h3>
+                                        <h4>₹ <%= product.price %>
+                                        </h4>
+                                    </div>
+                                    <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
+                                        href="/product/<%= product._id %>">
+                                        <i class="ri-add-line"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <% }) %>
+
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/footer') %>

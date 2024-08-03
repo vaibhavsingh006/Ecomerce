@@ -29,7 +29,7 @@ router.get('/', function (req, res) {
 
 router.get('/admin', ownerLoggedIn, function (req, res) {
     let success = req.flash('success');
-    res.render("createproducts", { success });
+    res.render("createproducts", { success, title: 'Create User', loggedin: false });
 });
 
 
@@ -63,22 +63,27 @@ router.post('/create', async function (req, res) {
 router.post('/login', async function (req, res) {
     let { email, password } = req.body;
     let owner = await ownerModel.findOne({ email })
-    if (!owner) return res.send('You are not a admin_!')
+    if (!owner) {
+        req.flash('error', 'You are not a admin_!')
+        res.redirect('/ownerLogin')
+        //  return res.send('You are not a admin_!')
+    }
     else {
         bcrypt.compare(password, owner.password, function (err, result) {
-            if (!result) return res.send('somthing went worng i think you should leave')
+            if (!result) {
+                req.flash('error', 'Your password not match');
+                res.redirect('/ownerLogin')
+                // return res.send('somthing went worng i think you should leave')
+            }
             else {
                 let token = jwt.sign({ email, id: owner._id }, process.env.JWT_KEY);
                 res.cookie('owner', token);
-                res.cookie('token', '');
+                res.cookie('token', token);
                 res.redirect('/owner/admin');
             }
         })
     }
 })
-
-
-
 
 
 // console.log(process.env.NODE_ENV);

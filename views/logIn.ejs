@@ -1,32 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
-    <div class="w-full h-screen absolute bg-zinc-600">
-        <div
-            class="relative top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] inline-block bg-zinc-400 p-[40px_40px]">
-            <h1 class="font-bold text-2xl mb-6 text-blue-700">LogIn Form</h1>
-            <form action="/user/login" method="post" class="flex flex-col">
-                <input class="p-[8px_5px] outline-none border-none w-[300px] mb-3" type="text" name="email"
-                    placeholder="email">
-                <input class="p-[8px_5px] outline-none border-none w-[300px] mb-5" type="text" name="password"
-                    placeholder="password">
-                <input
-                    class="p-[8px_5px] outline-none border-none w-[300px] bg-blue-600 cursor-pointer font-semibold text-white"
-                    value="LogIn User" type="submit">
-                <a href="/" class="mt-4 text-center block">Not have an account_?, <span
-                        class="text-blue-500">SignUp</span></a>
-                <a href="/ownerLogin" class="text-purple-500 text-center">Owner_Login</a>
-            </form>
+    <% if(error.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= error %>
+            </span>
         </div>
-    </div>
-</body>
+        <% } %>
 
-</html>
+            <div class="w-full h-screen absolute ">
+                <div
+                    class="relative top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] inline-block bg-[lavender] shadow-md p-[40px_40px]">
+                    <h1 class="font-bold text-2xl mb-6 text-blue-700">LogIn Form</h1>
+                    <form action="/user/login" method="post" class="flex flex-col">
+                        <input class="p-[8px_5px] outline-none border-none w-[300px] mb-3" type="text" name="email"
+                            placeholder="email">
+                        <input class="p-[8px_5px] outline-none border-none w-[300px] mb-5" type="text" name="password"
+                            placeholder="password">
+                        <input
+                            class="p-[8px_5px] outline-none border-none w-[300px] bg-blue-600 cursor-pointer font-semibold text-white"
+                            value="LogIn User" type="submit">
+                        <a href="/" class="mt-4 text-center block">Not have an account_?, <span
+                                class="text-blue-500">SignUp</span></a>
+                        <a href="/ownerLogin" class="text-purple-500 text-center">Owner_Login</a>
+                    </form>
+                </div>
+            </div>
+            <%- include('./partials/footer') %>
