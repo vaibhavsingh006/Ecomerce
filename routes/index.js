@@ -53,6 +53,13 @@ router.get('/product/:id', isLoggedIn, async function (req, res) {
     res.redirect('/shop');
 })
 
+router.get('/delete/:id', isLoggedIn, async function (req, res) {
+    let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
+    await updateUser.save();
+    res.redirect('/cart')
+})
+
+
 
 router.get('/cart', isLoggedIn, async function (req, res) {
     let user = await usersModel.findOne({ email: req.user.email }).populate('cart')
@@ -63,5 +70,7 @@ router.get('/cart', isLoggedIn, async function (req, res) {
         res.render('cart', { title: 'Cart', user })
     }
 })
+
+
 
 module.exports = router;

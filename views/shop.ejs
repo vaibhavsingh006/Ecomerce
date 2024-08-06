@@ -20,14 +20,14 @@
                     <!-- <a class="text-red-500" href="">Delete all</a> -->
                     <div class="flex items-start flex-wrap gap-5">
                         <% products.forEach(function(product){ %>
-                            <div class="w-[13rem] bg-[<%= product.bgcolor %>]">
+                            <div class="w-[13rem] bg-[<%= product.bgcolor %>] rounded">
                                 <div class="w-full h-52 flex items-center justify-center">
                                     <img class="h-[12rem] w-auto object-contain "
                                         src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
                                         alt="<%= product.name %>">
                                 </div>
                                 <div
-                                    class="flex justify-between items-center px-4 py-4 text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
+                                    class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
                                     <div>
                                         <h3>
                                             <%= product.name %>

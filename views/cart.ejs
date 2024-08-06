@@ -1,12 +1,14 @@
 <%- include('./partials/header') %>
 
     <div class="pb-10 h-full">
-        <div class="w-full h-screen flex flex-col items-start px-20 py-20 gap-10">
+        <div class="w-full h-screen flex flex-col items-start px-20 py-10">
+            <h1 class="mb-4 text-3xl text-purple-600 font-semibold">Your Cart</h1>
             <% if(user.cart.length>0){ %>
                 <% user.cart.forEach(function(product){ %>
-                    <div class="w-full h-screen flex items-start gap-10">
+                    <div
+                        class="w-full h-screen border border-gray-200 p-2 rounded-md mb-5 shadow-lg flex items-start gap-10">
                         <div class="w-[30%] rounded-md overflow-hidden">
-                            <div class="w-full h-72 bg-[<%= product.bgcolor %>]">
+                            <div class="w-full h-[200px] bg-[<%= product.bgcolor %>]">
                                 <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
                                     alt="<%= product.name %>" class="w-full h-full object-contain">
                             </div>
@@ -47,6 +49,7 @@
                                 <div class="flex mt-2">
                                     <h4 class="w-1/3">Shipping Fee</h4>
                                     <h4>FREE</h4>
+                                    <a href="/delete/<%= product._id %>">D</a>
                                 </div>
                             </div>
                             <div class="w-full h-[1px] bg-black mt-10"></div>

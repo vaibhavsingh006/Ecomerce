@@ -1,0 +1,12 @@
+// "bcrypt":
+// "config"
+// "connect-flash"
+// "cookie-parser"
+// "debug"
+// "dotenv"
+// "ejs"
+// "express"
+// "express-session"
+// "jsonwebtoken"
+// "mongoose"
+// "multer"
