@@ -8,15 +8,14 @@
         </div>
         <% } %>
 
-            <div class="w-full h-screen flex items-start pl-20 py-20">
-                <div class="w-[25%] flex h-screen flex-col items-start">
+            <div class="w-full h-auto flex items-start justify-between pt-[5rem]">
+                <div class="w-[23%] flex h-screen flex-col items-center shadow-xl pt-[2rem] bg-[lavender]">
                     <div class="flex flex-col">
-                        <a class="block w-fit mb-2" href="">All Products</a>
-                        <a class="block text-red-600 w-fit mb-2" href="/logout">Logout</a>
-                        <a class="block w-fit mb-2" href="/owner/admin">Create new product</a>
+                        <a class="block w-fit mb-2 font-semibold" href="">All Products</a>
+                        <a class="block w-fit mb-2 font-semibold" href="/owner/admin">Create new product</a>
                     </div>
                 </div>
-                <div class="w-[75%] flex flex-col gap-5 h-screen">
+                <div class="w-[70%] flex flex-col gap-5 h-screen pt-[2rem]">
                     <!-- <a class="text-red-500" href="">Delete all</a> -->
                     <div class="flex items-start flex-wrap gap-5">
                         <% products.forEach(function(product){ %>
@@ -29,7 +28,7 @@
                                 <div
                                     class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
                                     <div>
-                                        <h3>
+                                        <h3 class="font-semibold">
                                             <%= product.name %>
                                         </h3>
                                         <h4>₹ <%= product.price %>

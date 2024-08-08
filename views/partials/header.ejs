@@ -14,16 +14,18 @@
 
 <body>
 
-    <header class="w-full flex justify-between px-12 pt-6">
-        <div>
-            <a href="/shop" class="text-2xl font-semibold text-gray-600">E-commerce</a>
-        </div>
-        <% var loggedin=typeof loggedin !=="undefined" ? loggedin : true %>
+    <% var loggedin=typeof loggedin !=="undefined" ? loggedin : true %>
+        <header
+            class="w-full flex justify-between px-12 pt-6 absolute top-0 z-10 pb-6 <%= loggedin ? 'shadow-md' : '' %> ">
+            <div>
+                <a href="/shop" class="text-2xl font-semibold text-gray-600">E-commerce</a>
+            </div>
             <% if(loggedin){ %>
                 <div class="text-lg font-semibold text-black">
                     <a href="/shop" class="ml-6">Products</a>
                     <a href="/cart" class="ml-6">Cart</a>
-                    <a href="/logout" class="mx-6 text-red-600">LogOut</a>
+                    <a href="/logout"
+                        class="mx-6 text-red-600 bg-red-400 p-[5px_7px] rounded-md text-white font-sm font-semibold">LogOut</a>
                 </div>
                 <% } %>
-    </header>
+        </header>
