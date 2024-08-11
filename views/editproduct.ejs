@@ -18,21 +18,23 @@
                         </div>
                     </div>
                     <main class="w-3/4 bg-white p-8 shadow-lg border border-gray-200 rounded-md ml-4 bg-[lavender]">
-                        <h2 class="text-xl font-bold mb-4">Create New Product</h2>
-                        <form autocomplete="off" action="/product/create" method="post" enctype="multipart/form-data">
+                        <h2 class="text-xl font-bold mb-4">Update Product</h2>
+                        <form autocomplete="off" action="/editproduct" method="post" enctype="multipart/form-data">
                             <div class="mb-6">
                                 <h3 class="text-lg font-semibold mb-2">Product Details</h3>
                                 <div class="mb-4">
-                                    <label class="block mb-2 font-medium">Product Image</label>
-                                    <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
+                                    <input type="text" name="id" hidden value="<%= product.id %>">
+                                    <!-- <label class="block mb-2 font-medium">Product </label>
+                                    <input name="image" type="file" class="py-2 px-4 rounded"
+                                        value="<%= product.image %>"> -->
                                 </div>
                                 <div class="grid grid-cols-2 gap-4">
                                     <input name="name" type="text" placeholder="Product Name"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.name %>">
                                     <input name="price" type="text" placeholder="Product Price"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.price %>">
                                     <input name="discount" type="text" placeholder="Discount Price"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.discount %>">
                                 </div>
                             </div>
 
@@ -40,26 +42,22 @@
                                 <h3 class="text-lg font-semibold mb-2">Panel Details</h3>
                                 <div class="grid grid-cols-2 gap-4">
                                     <input name="bgcolor" type="text" placeholder="Background Color"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.bgcolor %>">
                                     <input name="panelcolor" type="text" placeholder="Panel Color"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.panelcolor %>">
                                     <input name="textcolor" type="text" placeholder="Text Color"
-                                        class="border p-2 rounded w-full">
+                                        class="border p-2 rounded w-full" value="<%= product.textcolor %>">
                                 </div>
                             </div>
-                            <div>
+                            <!-- <div>
                                 <h3 class="text-lg font-semibold mb-2">Panel Details</h3>
                                 <div class="grid grid-cols-2 gap-4">
-                                    <input name="fakeprice" type="text" placeholder="Fake Price"
+                                    <input name="fakeprice" type="text" placeholder="Background Color"
                                         class="border p-2 rounded w-full">
-                                    <input name="productquantity" hidden type="text" placeholder="Product Quantity"
-                                        class="border p-2 rounded w-full" value="1">
-                                    <input name="productstock" type="text" placeholder="Total Stock"
-                                        class="border p-2 rounded w-full">
-                                    <input name="availblestock" hidden type="text" placeholder="Total Stock"
+                                    <input name="productcontity" type="text" placeholder="Panel Color"
                                         class="border p-2 rounded w-full">
                                 </div>
-                            </div>
+                            </div> -->
                             <input class="px-5 py-2 rounded mt-3 bg-blue-500 text-white shadow-md" type="submit"
                                 value="Create New Product">
                         </form>

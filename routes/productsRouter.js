@@ -12,7 +12,8 @@ router.post('/create', upload.single('image'), async function (req, res) {
 
     // res.send(req.file);
     try {
-        let { name, price, bgcolor, textcolor, panelcolor, discount } = req.body;
+        let { name, price, bgcolor, textcolor, panelcolor, discount, fakeprice, productquantity, productstock } = req.body;
+
         let product = await productModel.create({
             image: req.file.buffer,
             name,
@@ -20,17 +21,27 @@ router.post('/create', upload.single('image'), async function (req, res) {
             bgcolor,
             textcolor,
             panelcolor,
-            discount
+            discount,
+            fakeprice,
+            productquantity,
+            productstock,
+            availblestock: req.body.productstock - 1,
         })
 
-        req.flash('success', 'Product created successfully.');
-        res.redirect('/owner/admin')
+        // let stock = productstock;
+        // availblestock = stock;
+        // await product.save();
+
+
+        res.redirect('/owner/admin');
     }
     catch (err) {
         res.send(err.message);
     }
 
 });
+
+
 
 
 module.exports = router;

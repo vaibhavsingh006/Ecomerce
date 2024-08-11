@@ -8,14 +8,15 @@
         </div>
         <% } %>
 
-            <div class="w-full h-auto flex items-start justify-between pt-[5rem]">
-                <div class="w-[23%] flex h-screen flex-col items-center shadow-xl pt-[2rem] bg-[lavender]">
+            <div class="w-full h-auto flex items-start justify-between pt-[5rem] relative">
+                <div
+                    class="w-[23%] flex h-screen flex-col items-center shadow-xl pt-[2rem] bg-[lavender] sticky top-0 bottom-0">
                     <div class="flex flex-col">
                         <a class="block w-fit mb-2 font-semibold" href="">All Products</a>
                         <a class="block w-fit mb-2 font-semibold" href="/owner/admin">Create new product</a>
                     </div>
                 </div>
-                <div class="w-[70%] flex flex-col gap-5 h-screen pt-[2rem]">
+                <div class="w-[70%] flex flex-col gap-5 h-auto pt-[2rem]">
                     <!-- <a class="text-red-500" href="">Delete all</a> -->
                     <div class="flex items-start flex-wrap gap-5">
                         <% products.forEach(function(product){ %>
@@ -25,19 +26,30 @@
                                         src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
                                         alt="<%= product.name %>">
                                 </div>
-                                <div
-                                    class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
-                                    <div>
-                                        <h3 class="font-semibold">
-                                            <%= product.name %>
-                                        </h3>
-                                        <h4>₹ <%= product.price %>
-                                        </h4>
+                                <div class="text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>] rounded">
+                                    <div
+                                        class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
+
+                                        <div>
+                                            <h3 class="font-semibold">
+                                                <%= product.name %>
+                                            </h3>
+                                            <h4>₹ <%= product.price %>
+                                            </h4>
+                                        </div>
+                                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
+                                            href="/product/<%= product._id %>">
+                                            <i class="ri-add-line"></i>
+                                        </a>
                                     </div>
-                                    <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
-                                        href="/product/<%= product._id %>">
-                                        <i class="ri-add-line"></i>
-                                    </a>
+                                    <% if(owner){ %>
+                                        <div class="flex justify-between items-center px-4 pb-4">
+                                            <a href="editproduct/<%= product._id %>"
+                                                class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Edit</a>
+                                            <a href=""
+                                                class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Delete</a>
+                                        </div>
+                                        <% } %>
                                 </div>
                             </div>
                             <% }) %>

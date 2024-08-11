@@ -7,6 +7,13 @@ const productSchema = mongoose.Schema({
     bgcolor: String,
     panelcolor: String,
     textcolor: String,
+    fakeprice: Number,
+    productquantity: {
+        type: Number,
+        default: 1,
+    },
+    productstock: Number,
+    availblestock: Number,
     discount: {
         type: Number,
         default: 0,
