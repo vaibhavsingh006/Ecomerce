@@ -16,7 +16,7 @@
                         <a class="block w-fit mb-2 font-semibold" href="/owner/admin">Create new product</a>
                     </div>
                 </div>
-                <div class="w-[70%] flex flex-col gap-5 h-auto pt-[2rem]">
+                <div class="w-[70%] flex flex-col gap-5 h-auto pt-[2rem] mb-4">
                     <!-- <a class="text-red-500" href="">Delete all</a> -->
                     <div class="flex items-start flex-wrap gap-5">
                         <% products.forEach(function(product){ %>
@@ -34,8 +34,17 @@
                                             <h3 class="font-semibold">
                                                 <%= product.name %>
                                             </h3>
-                                            <h4>₹ <%= product.price %>
-                                            </h4>
+                                            <div class="flex gap-2 items-center">
+                                                <h4>₹ <%= product.price %>
+                                                </h4>
+                                                <p
+                                                    class="text-xs text-[<%= product.textcolor %>] relative inline-block ">
+                                                    <span
+                                                        class=" before:absolute before:top-1/2 before:left-0 before:w-full before:h-[1px] before:bg-black before:content-['']">
+                                                        ₹ <%= product.fakeprice %>
+                                                    </span>
+                                                </p>
+                                            </div>
                                         </div>
                                         <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
                                             href="/product/<%= product._id %>">
@@ -46,7 +55,7 @@
                                         <div class="flex justify-between items-center px-4 pb-4">
                                             <a href="editproduct/<%= product._id %>"
                                                 class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Edit</a>
-                                            <a href=""
+                                            <a href="delete/<%= product._id %>"
                                                 class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Delete</a>
                                         </div>
                                         <% } %>

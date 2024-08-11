@@ -65,6 +65,21 @@ router.get('/product/:id', isLoggedIn, async function (req, res) {
     }
 })
 
+// delete 
+
+router.get('/delete/:id', isLoggedIn, async function (req, res) {
+    let productId = req.params.id;
+
+    await productsModel.findByIdAndDelete(productId)
+
+    res.redirect('/shop');
+    // console.log(user.cart)
+
+})
+
+
+// delete 
+
 
 // --------------- edit product 
 
