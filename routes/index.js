@@ -65,6 +65,31 @@ router.get('/product/:id', isLoggedIn, async function (req, res) {
     }
 })
 
+//  Buy Now button in cart
+router.get('/done/:id', isLoggedIn, async function (req, res) {
+    let product = await productsModel.findOne({ _id: req.params.id });
+
+    try {
+        let user = req.user;
+        user.orders.set(product._id, product.productquantity);
+        await user.save();
+
+        product.productquantity = 0;
+        await product.save();
+        let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
+        await updateUser.save();
+
+        console.log(user);
+        req.flash('success', 'Payment successfully_!😁');
+        res.redirect('/cart')
+    } catch (err) {
+        console.log(err)
+    }
+
+})
+//  Buy Now button in cart
+
+
 // delete 
 
 router.get('/delete/:id', isLoggedIn, async function (req, res) {
@@ -158,6 +183,7 @@ router.get('/remove/:id', async function (req, res) {
     }
 })
 
+// remove from cart only 
 router.get('/delete/:id', isLoggedIn, async function (req, res) {
     let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
     await updateUser.save();
@@ -171,8 +197,8 @@ router.get('/cart', isLoggedIn, async function (req, res) {
     if (!user) {
         return res.send('you are admin')
     } else {
-
-        res.render('cart', { title: 'Cart', user })
+        let success = req.flash('success');
+        res.render('cart', { title: 'Cart', user, success })
     }
 })
 

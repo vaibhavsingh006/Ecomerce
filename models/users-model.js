@@ -9,8 +9,10 @@ const userSchema = mongoose.Schema({
         ref: 'product'
     }],
     orders: {
-        type: Array,
-        default: [],
+        type: Map,
+        of: Number,
+        default: {},
+        ref: 'product'
     },
     contact: Number,
     picture: String

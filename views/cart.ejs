@@ -1,78 +1,89 @@
 <%- include('./partials/header') %>
 
-    <div class="pb-10 h-full">
-        <div class="w-full h-screen flex flex-col items-start px-20 py-28">
-            <h1 class="mb-4 text-3xl text-purple-600 font-semibold">Your Cart</h1>
-            <% if(user.cart.length>0){ %>
-                <% user.cart.forEach(function(product){ %>
-                    <div
-                        class="w-full h-screen border border-gray-200 p-2 rounded-md mb-5 shadow-lg flex items-start gap-10">
-                        <div class="w-[30%] rounded-md overflow-hidden">
-                            <div class="w-full h-[200px] bg-[<%= product.bgcolor %>]">
-                                <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
-                                    alt="<%= product.name %>" class="w-full h-full object-contain">
-                            </div>
+    <% if(success.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= success %>
+            </span>
+        </div>
+        <% } %>
+
+            <div class="pb-10 h-full">
+                <div class="w-full h-screen flex flex-col items-start px-20 py-28">
+                    <h1 class="mb-4 text-3xl text-purple-600 font-semibold">Your Cart</h1>
+                    <% if(user.cart.length>0){ %>
+                        <% user.cart.forEach(function(product){ %>
                             <div
-                                class="w-full flex justify-between px-5 py-4 bg-[<%= product.panelcolor %>] text-[<%= product.textcolor %>]">
-                                <h3 class="text-2xl">
-                                    <%= product.name %>
-                                </h3>
-                                <div class="flex items-center gap-2">
-                                    <a href="/add/<%= product._id %>"><i
-                                            class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-add-line"></i></a>
-                                    <div class="px-2 py-1 rounded-md bg-white text-black">0<%= product.productquantity
-                                            %>
+                                class="w-full h-screen border border-gray-200 p-2 rounded-md mb-5 shadow-lg flex items-start gap-10">
+                                <div class="w-[30%] rounded-md overflow-hidden">
+                                    <div class="w-full h-[200px] bg-[<%= product.bgcolor %>]">
+                                        <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                                            alt="<%= product.name %>" class="w-full h-full object-contain">
                                     </div>
-                                    <a href="/remove/<%= product._id %>"><i
-                                            class="w-7 h-7 bg-white flex rounded-full items-center justify-center ri-subtract-line"></i></a>
-                                </div>
-                            </div>
-                            <!-- <div class="flex items-center justify-between px-5 py-3">
+                                    <div
+                                        class="w-full flex justify-between px-5 py-4 bg-[<%= product.panelcolor %>] text-[<%= product.textcolor %>]">
+                                        <h3 class="text-2xl font-semibold">
+                                            <%= product.name %>
+                                        </h3>
+                                        <div class="flex items-center gap-2">
+                                            <a href="/add/<%= product._id %>"><i
+                                                    class="w-7 h-7 bg-white text-black font-semibold flex rounded-full items-center justify-center ri-add-line"></i></a>
+                                            <div class="px-2 py-1 rounded-md bg-white font-semibold text-black">0<%=
+                                                    product.productquantity %>
+                                            </div>
+                                            <a href="/remove/<%= product._id %>"><i
+                                                    class="w-7 h-7 bg-white text-black font-semibold flex rounded-full items-center justify-center ri-subtract-line"></i></a>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="flex items-center justify-between px-5 py-3">
                             <h4 class="text-lg">Net Total</h4>
                             <h2 class="text-lg">₹ 1200</h2>
                         </div> -->
-                        </div>
-                        <div class="w-[70%]">
-                            <h3 class="text-xl">Price Breakdown</h3>
-                            <div class="px-10 mt-5">
-                                <div class="flex mt-2">
-                                    <h4 class="w-1/3">MRP</h4>
-                                    <h4>₹ <%= product.fakeprice %>
-                                    </h4>
                                 </div>
-                                <div class="flex mt-2">
-                                    <h4 class="w-1/3">Discount on MRP</h4>
-                                    <h4>₹ <%= product.discount %>
-                                    </h4>
-                                </div>
-                                <div class="flex mt-2">
-                                    <h4 class="w-1/3">Platform Fee</h4>
-                                    <h4>₹ 69</h4>
-                                </div>
-                                <div class="flex mt-2">
-                                    <h4 class="w-1/3">Shipping Fee</h4>
-                                    <h4>FREE</h4>
+                                <div class="w-[70%]">
+                                    <h3 class="text-xl font-semibold">Price Breakdown</h3>
+                                    <div class="px-10 mt-5">
+                                        <div class="flex mt-2">
+                                            <h4 class="w-1/3">MRP</h4>
+                                            <h4>₹ <%= product.fakeprice %>
+                                            </h4>
+                                        </div>
+                                        <div class="flex mt-2">
+                                            <h4 class="w-1/3">Discount on MRP</h4>
+                                            <h4>₹ <%= product.discount %>
+                                            </h4>
+                                        </div>
+                                        <div class="flex mt-2">
+                                            <h4 class="w-1/3">Platform Fee</h4>
+                                            <h4>₹ 69</h4>
+                                        </div>
+                                        <div class="flex mt-2">
+                                            <h4 class="w-1/3">Shipping Fee</h4>
+                                            <h4>FREE</h4>
 
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[1px] bg-black mt-10"></div>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex mt-5 w-[43%] justify-between">
+                                            <h3 class="w-auto text-xl font-semibold">Total Amount</h3>
+                                            <% var total=product.fakeprice - product.discount - 69 %>
+                                                <h3 class="font-semibold text-xl text-green-600">₹ <%= total %>
+                                                </h3>
+                                        </div>
+                                        <a href="/done/<%= product._id %>"
+                                            class="bg-green-400 p-[5px_7px] rounded-md text-white font-sm font-semibold">Buy
+                                            Now</a>
+                                        <a href="/delete/<%= product._id %>"
+                                            class="bg-red-400 p-[5px_7px] rounded-md text-white font-sm font-semibold text-end">Remove</a>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div class="w-full h-[1px] bg-black mt-10"></div>
-                            <div class="flex justify-between items-center">
-                                <div class="flex mt-5 w-[43%] justify-between">
-                                    <h3 class="w-auto text-xl">Total Amount</h3>
-                                    <% var total=product.fakeprice - product.discount - 69 %>
-                                        <h3 class="font-semibold text-xl text-green-600">₹ <%= total %>
-                                        </h3>
-                                </div>
-                                <a href="/delete/<%= product._id %>"
-                                    class="bg-red-400 p-[5px_7px] rounded-md text-white font-sm font-semibold text-end">Remove</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <% }) %>
-                        <%} else{ %>
-                            <h1>you not added now</h1>
-                            <% } %>
-        </div>
-    </div>
-    <%- include('./partials/footer') %>
+                            <% }) %>
+                                <%} else{ %>
+                                    <h1>you not added now</h1>
+                                    <% } %>
+                </div>
+            </div>
+            <%- include('./partials/footer') %>

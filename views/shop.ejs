@@ -46,7 +46,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
+                                        <a class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white"
                                             href="/product/<%= product._id %>">
                                             <i class="ri-add-line"></i>
                                         </a>
@@ -54,9 +54,10 @@
                                     <% if(owner){ %>
                                         <div class="flex justify-between items-center px-4 pb-4">
                                             <a href="editproduct/<%= product._id %>"
-                                                class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Edit</a>
+                                                class="bg-yellow-400 text-black shadow-lg font-semibold px-2 py-[5px] rounded">Edit
+                                                Product</a>
                                             <a href="delete/<%= product._id %>"
-                                                class="bg-[<%= product.panelcolor %>] shadow-lg px-2 py-[5px] rounded">Delete</a>
+                                                class="shadow-lg bg-red-500 text-white px-2 py-[5px] font-semibold rounded">Delete</a>
                                         </div>
                                         <% } %>
                                 </div>
