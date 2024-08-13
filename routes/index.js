@@ -130,7 +130,8 @@ router.post('/editproduct', upload.single('image'), async function (req, res) {
         discount,
         fakeprice,
         productquantity,
-        productstock
+        productstock,
+        availblestock: req.body.productstock - 1,
     }
     let id = req.body.id;
     let product = await productsModel.findByIdAndUpdate(id, updatedData, { new: true });

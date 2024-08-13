@@ -20,47 +20,61 @@
                     <!-- <a class="text-red-500" href="">Delete all</a> -->
                     <div class="flex items-start flex-wrap gap-5">
                         <% products.forEach(function(product){ %>
-                            <div class="w-[13rem] bg-[<%= product.bgcolor %>] rounded">
-                                <div class="w-full h-52 flex items-center justify-center">
-                                    <img class="h-[12rem] w-auto object-contain "
-                                        src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
-                                        alt="<%= product.name %>">
-                                </div>
-                                <div class="text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>] rounded">
-                                    <div
-                                        class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
+                            <div class="w-[13rem] bg-[<%= product.bgcolor %>] relative rounded">
+                                <% if(product.availblestock===1){ %>
+                                    <button
+                                        class="bg-red-400 absolute top-2 left-1 px-2 text-black shadow-lg font-semibold py-[5px] rounded">Sold
+                                        Out</button>
+                                    <% } %>
+                                        <div class="w-full h-52 flex items-center justify-center">
+                                            <img class="h-[12rem] w-auto object-contain "
+                                                src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                                                alt="<%= product.name %>">
+                                        </div>
+                                        <div
+                                            class="text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>] rounded">
+                                            <div
+                                                class="flex justify-between items-center px-4 py-4 rounded text-[<%= product.textcolor %>] bg-[<%= product.panelcolor %>]">
 
-                                        <div>
-                                            <h3 class="font-semibold">
-                                                <%= product.name %>
-                                            </h3>
-                                            <div class="flex gap-2 items-center">
-                                                <h4>₹ <%= product.price %>
-                                                </h4>
-                                                <p
-                                                    class="text-xs text-[<%= product.textcolor %>] relative inline-block ">
-                                                    <span
-                                                        class=" before:absolute before:top-1/2 before:left-0 before:w-full before:h-[1px] before:bg-black before:content-['']">
-                                                        ₹ <%= product.fakeprice %>
-                                                    </span>
-                                                </p>
+                                                <div>
+                                                    <h3 class="font-semibold">
+                                                        <%= product.name %>
+                                                    </h3>
+                                                    <div class="flex gap-2 items-center">
+                                                        <h4>₹ <%= product.price %>
+                                                        </h4>
+                                                        <p
+                                                            class="text-xs text-[<%= product.textcolor %>] relative inline-block ">
+                                                            <span
+                                                                class=" before:absolute before:top-1/2 before:left-0 before:w-full before:h-[1px] before:bg-black before:content-['']">
+                                                                ₹ <%= product.fakeprice %>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <% if(product.availblestock===1){ %>
+
+                                                    <p
+                                                        class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white pointer">
+                                                        <i class="ri-add-line"></i>
+                                                    </p>
+                                                    <% }else{ %>
+                                                        <a class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white"
+                                                            href="/product/<%= product._id %>">
+                                                            <i class="ri-add-line"></i>
+                                                        </a>
+                                                        <% } %>
                                             </div>
+                                            <% if(owner){ %>
+                                                <div class="flex justify-between items-center px-4 pb-4">
+                                                    <a href="editproduct/<%= product._id %>"
+                                                        class="bg-yellow-400 text-black shadow-lg font-semibold px-2 py-[5px] rounded">Edit
+                                                        Product</a>
+                                                    <a href="delete/<%= product._id %>"
+                                                        class="shadow-lg bg-red-500 text-white px-2 py-[5px] font-semibold rounded">Delete</a>
+                                                </div>
+                                                <% } %>
                                         </div>
-                                        <a class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white"
-                                            href="/product/<%= product._id %>">
-                                            <i class="ri-add-line"></i>
-                                        </a>
-                                    </div>
-                                    <% if(owner){ %>
-                                        <div class="flex justify-between items-center px-4 pb-4">
-                                            <a href="editproduct/<%= product._id %>"
-                                                class="bg-yellow-400 text-black shadow-lg font-semibold px-2 py-[5px] rounded">Edit
-                                                Product</a>
-                                            <a href="delete/<%= product._id %>"
-                                                class="shadow-lg bg-red-500 text-white px-2 py-[5px] font-semibold rounded">Delete</a>
-                                        </div>
-                                        <% } %>
-                                </div>
                             </div>
                             <% }) %>
 
