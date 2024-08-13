@@ -74,7 +74,7 @@ router.get('/done/:id', isLoggedIn, async function (req, res) {
         user.orders.set(product._id, product.productquantity);
         await user.save();
 
-        product.productquantity = 0;
+        product.productquantity = 1;
         await product.save();
         let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
         await updateUser.save();
@@ -184,7 +184,7 @@ router.get('/remove/:id', async function (req, res) {
 })
 
 // remove from cart only 
-router.get('/delete/:id', isLoggedIn, async function (req, res) {
+router.get('/deletecart/:id', isLoggedIn, async function (req, res) {
     let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
     await updateUser.save();
     res.redirect('/cart')
