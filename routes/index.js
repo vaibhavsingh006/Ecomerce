@@ -65,13 +65,18 @@ router.get('/product/:id', isLoggedIn, async function (req, res) {
     }
 })
 
-//  Buy Now button in cart
+// ------------------ Buy Now button in cart
 router.get('/done/:id', isLoggedIn, async function (req, res) {
     let product = await productsModel.findOne({ _id: req.params.id });
 
     try {
         let user = req.user;
-        user.orders.set(product._id, product.productquantity);
+        const { _id, productquantity, price } = product
+        let productId = _id;
+        // user.orders.set(product._id, product.productquantity);
+        let amount = price * productquantity;
+        let totalamount = amount;
+        user.orders.push({ productId, productquantity, totalamount });
         await user.save();
 
         product.productquantity = 1;
@@ -87,10 +92,10 @@ router.get('/done/:id', isLoggedIn, async function (req, res) {
     }
 
 })
-//  Buy Now button in cart
+// ---------------- Buy Now button in cart
 
 
-// delete 
+// -------------- delete product by admin
 
 router.get('/delete/:id', isLoggedIn, async function (req, res) {
     let productId = req.params.id;
@@ -103,10 +108,8 @@ router.get('/delete/:id', isLoggedIn, async function (req, res) {
 })
 
 
-// delete 
 
-
-// --------------- edit product 
+// --------------- edit product page
 
 router.get('/editproduct/:id', async function (req, res) {
     let product = await productsModel.findOne({ _id: req.params.id });
@@ -117,6 +120,8 @@ router.get('/editproduct/:id', async function (req, res) {
         res.send('Somthing went worng')
     }
 })
+
+// ---------------- edit product
 
 router.post('/editproduct', upload.single('image'), async function (req, res) {
     // let product = await productsModel.findOne({ _id: req.body.id });
@@ -165,6 +170,7 @@ router.get('/add/:id', async function (req, res) {
     }
 })
 
+// ------- dicrease the quantity
 router.get('/remove/:id', async function (req, res) {
     let product = await productsModel.findOne({ _id: req.params.id });
     // console.log(product);
@@ -184,7 +190,7 @@ router.get('/remove/:id', async function (req, res) {
     }
 })
 
-// remove from cart only 
+// --------------- remove from cart only 
 router.get('/deletecart/:id', isLoggedIn, async function (req, res) {
     let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
     await updateUser.save();
@@ -202,5 +208,52 @@ router.get('/cart', isLoggedIn, async function (req, res) {
         res.render('cart', { title: 'Cart', user, success })
     }
 })
+
+// ------------------ Profile Page route
+
+router.get('/profile', isLoggedIn, async function (req, res) {
+    let user = await usersModel.findOne({ email: req.user.email }).populate({
+        path: "orders.productId",
+        model: 'product'
+    })
+    // console.log(user.orders);
+
+    res.render('profile', { user, loggedin: true });
+})
+
+// Profile Page route
+
+// -------------------- update user information
+
+router.post('/updateuser', upload.single('profilePicture'), async function (req, res) {
+    // let product = await productsModel.findOne({ _id: req.body.id });
+    const { fullname, email, contact, address } = req.body
+    let updatedData = {
+        fullname,
+        email,
+        contact,
+        address,
+    }
+
+    if (req.file) {
+        updatedData.profilePicture = req.file.buffer;
+    }
+
+    let id = req.body.id;
+    let product = await usersModel.findByIdAndUpdate(id, updatedData, { new: true });
+    res.redirect('/profile')
+})
+
+router.get('/updateuser/:id', async function (req, res) {
+    let user = await usersModel.findOne({ _id: req.params.id });
+    if (user) {
+        let success = req.flash('success');
+        res.render(`updateuser`, { success, title: 'update user', loggedin: false, user })
+    } else {
+        res.send('Somthing went worng')
+    }
+})
+
+// update user information
 
 module.exports = router;

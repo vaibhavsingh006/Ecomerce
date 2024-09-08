@@ -68,7 +68,8 @@
                                         <div class="flex mt-5 w-[43%] justify-between">
                                             <h3 class="w-auto text-xl font-semibold">Total Amount</h3>
                                             <% var total=product.fakeprice - product.discount - 69 %>
-                                                <h3 class="font-semibold text-xl text-green-600">₹ <%= total %>
+                                                <h3 class="font-semibold text-xl text-green-600">₹ <%=
+                                                        product.productquantity * total %>
                                                 </h3>
                                         </div>
                                         <a href="/done/<%= product._id %>"

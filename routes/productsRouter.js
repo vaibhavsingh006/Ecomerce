@@ -32,7 +32,6 @@ router.post('/create', upload.single('image'), async function (req, res) {
         // availblestock = stock;
         // await product.save();
 
-
         res.redirect('/owner/admin');
     }
     catch (err) {

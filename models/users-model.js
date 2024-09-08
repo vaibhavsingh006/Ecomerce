@@ -8,14 +8,35 @@ const userSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'product'
     }],
-    orders: {
-        type: Map,
-        of: Number,
-        default: {},
-        ref: 'product'
-    },
+    orders: [
+        {
+            productId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'product',
+            },
+            productquantity: Number,
+            totalamount: Number,
+            dateAdded: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
     contact: Number,
-    picture: String
-})
+    profilePicture: Buffer,
+    address: String
+});
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('user', userSchema);
+
+// purchased: [{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'product'
+// }],
+// orders: {
+//     type: Map,
+//     of: Number,
+//     default: {},
+//     ref: 'product'
+// it's show the data like :- productId, productquantity
+// },

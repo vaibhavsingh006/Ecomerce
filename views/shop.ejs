@@ -52,18 +52,21 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <% if(product.availblestock===1){ %>
+                                                <% if(!owner){ %>
+                                                    <% if(product.availblestock===1){ %>
 
-                                                    <p
-                                                        class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white pointer">
-                                                        <i class="ri-add-line"></i>
-                                                    </p>
-                                                    <% }else{ %>
-                                                        <a class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white"
-                                                            href="/product/<%= product._id %>">
+                                                        <p
+                                                            class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white pointer">
                                                             <i class="ri-add-line"></i>
-                                                        </a>
-                                                        <% } %>
+                                                        </p>
+
+                                                        <% }else{ %>
+                                                            <a class="w-7 h-7 flex items-center justify-center text-black font-semibold rounded-full bg-white"
+                                                                href="/product/<%= product._id %>">
+                                                                <i class="ri-add-line"></i>
+                                                            </a>
+                                                            <% } %>
+                                                                <% } %>
                                             </div>
                                             <% if(owner){ %>
                                                 <div class="flex justify-between items-center px-4 pb-4">
