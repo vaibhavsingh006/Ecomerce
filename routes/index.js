@@ -84,7 +84,7 @@ router.get('/done/:id', isLoggedIn, async function (req, res) {
         let updateUser = await usersModel.findOneAndUpdate({ email: req.user.email }, { $pull: { cart: req.params.id } }, { new: true })
         await updateUser.save();
 
-        console.log(user);
+        // console.log(user);
         req.flash('success', 'Payment successfully_!😁');
         res.redirect('/cart')
     } catch (err) {

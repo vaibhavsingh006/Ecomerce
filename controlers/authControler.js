@@ -28,12 +28,12 @@ module.exports.registerUser = async function (req, res) {
                         // res.send(user)
                         let token = jwt.sign({ email, id: user._id }, process.env.JWT_KEY);
                         res.cookie('token', token);
+                        res.cookie('owner', '');
                         res.redirect('/shop');
                     }
                 })
             })
         }
-
     }
     catch (err) {
         res.send(err.send);
@@ -59,9 +59,9 @@ module.exports.loginUser = async function (req, res) {
             else {
                 let token = jwt.sign({ email, id: user._id }, process.env.JWT_KEY);
                 res.cookie('token', token);
+                res.cookie('owner', '');
                 res.redirect('/shop');
             }
         })
     }
-
 }
