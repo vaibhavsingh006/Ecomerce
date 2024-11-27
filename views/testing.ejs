@@ -1,0 +1,30 @@
+<%- include('./partials/header') %>
+
+    <% if(error.length>0){ %>
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= error %>
+            </span>
+        </div>
+        <% } %>
+
+            <div class="w-full h-screen absolute bg-gradient-to-r from-[#eeaeca] to-[#94bbe9]">
+                <div
+                    class="relative w-[32%] top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] inline-block shadow p-[40px_40px]">
+                    <h1 class="font-bold text-2xl mb-6 text-blue-700">SignUp Form</h1>
+                    <form action="/user/register" method="post" class="flex flex-col">
+                        <input class="p-[8px_5px] w-full rounded-md outline-none border-none w-[300px] mb-3" type="text"
+                            name="subject" placeholder="subject">
+                        <input class="p-[8px_5px] w-full rounded-md outline-none border-none w-[300px] mb-3" type="text"
+                            name="email" placeholder="email">
+                        <input class="p-[8px_5px] w-full rounded-md outline-none border-none w-[300px] mb-5" type="text"
+                            name="message" placeholder="message">
+                        <input
+                            class="p-[10px_15px] rounded-full outline-none border-none w-[300px] w-[fit-content] bg-blue-600 cursor-pointer font-semibold text-white"
+                            value="Create User" type="submit">
+                    </form>
+                    <a href="/login" class="mt-4 text-center block font-sm">Already have an account_?, <span
+                            class="text-blue-500 font-semibold">LogIn</span></a>
+                </div>
+            </div>
+            <%- include('./partials/footer') %>

@@ -5,6 +5,55 @@ const productsModel = require('../models/products-model');
 const usersModel = require('../models/users-model');
 const upload = require('../config/multer-config');
 
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
+router.use(bodyParser.urlencoded({ extended: true }));
+
+// ================================================
+
+// router.get('/testing', function (req, res) {
+//     let error = req.flash('error');
+//     res.render('testing', { error, title: 'Testing', loggedin: false });
+// })
+
+// router.post('/send-email', async (req, res) => {
+//     const senderEmail = 'EMAIL_ID'; // Your email address
+//     const senderPassword = 'PASS_KEY'; // Your email password
+
+//     const subject = req.body.subject;
+//     const email = req.body.email;
+//     const message = req.body.message;
+//     // const messages = Send From {receiverEmail},{message};
+
+//     // Create a transporter
+//     const transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//             user: senderEmail,
+//             pass: senderPassword,
+//         },
+//     });
+
+// Set up email data
+//     const mailOptions = {
+//         from: senderEmail,
+//         to: 'prateekya23@gmail.com',
+//         subject: subject,
+//         text: messages,
+//     };
+
+//     try {
+//         // Send the email
+//         await transporter.sendMail(mailOptions);
+//         res.render('index.html'); // Render your HTML template
+//     } catch (error) {
+//         console.error('Error sending email:', error);
+//         res.status(500).send('Error sending email');
+//     }
+// });
+
+// ==========================================================
 
 router.get('/', function (req, res) {
     let error = req.flash('error');
@@ -16,7 +65,6 @@ router.get('/logout', function (req, res) {
     res.cookie('owner', '');
     res.redirect('/login');
 });
-
 
 router.get('/ownerLogin', function (req, res) {
     let error = req.flash('error');
@@ -57,7 +105,6 @@ router.get('/product/:id', isLoggedIn, async function (req, res) {
         req.flash('success', 'Already exites in cart_!😬');
         res.redirect('/shop');
     } else {
-
         user.cart.push(req.params.id);
         await user.save();
         req.flash('success', 'Add to cart_!😁');

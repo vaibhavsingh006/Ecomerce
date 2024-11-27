@@ -57,7 +57,7 @@
             background: #06C167;
             border: 1px solid #06C167;
             padding: 5px 15px;
-            color: #FFFFFF;
+            color: #FFF;
             border-radius: 2px;
         }
 
@@ -178,7 +178,8 @@
                                             <strong>Email Address:</strong>
                                             <%= user.email %>
                                         </p>
-                                        <p class="my-3"><strong>Contact:</strong>
+                                        <p class="my-3">
+                                            <strong>Contact:</strong>
                                             <%= user.contact %>
                                         </p>
 
@@ -206,71 +207,75 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <% user.orders.forEach((order)=>{ %>
-                                                <!-- if(product) -->
-                                                <tr>
-                                                    <th>
-                                                        <img src="data:image/jpeg;base64,<%= order.productId.image.toString('base64') %>"
-                                                            alt="<%= order.productId.name %>" class="" width="60" />
-                                                    </th>
-                                                    <td class="font-semibold text-lg" style="vertical-align: middle;">
-                                                        <%= order.productId.name %>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">₹<%= order.productId.price - 69
-                                                            %>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">₹100 X <%= order.productquantity
-                                                            %>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <strong>₹<%= order.productquantity * (order.productId.price -
-                                                                69) %>
-                                                        </strong>
-                                                    </td>
-                                                    <td style="vertical-align: middle;">
-                                                        <span class="badge badge-success">
-                                                            <%= new Date(order.dateAdded).toISOString().split('T')[0] %>
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                                <% }) %>
+                                            <% user.orders.forEach((order)=> { %> <% if (order.productId) { %>
                                                     <tr>
-                                                        <th colspan="2">
-                                                            <span>Status:</span>
-                                                            <% if(user.orders[0]){ %>
-                                                                <span class="badge badge-success">PAID</span>
-                                                                <% } %>
+                                                        <th>
+                                                            <img src="data:image/jpeg;base64,<%= order.productId.image.toString('base64') %>"
+                                                                alt="<%= order.productId.name %>" width="60" />
                                                         </th>
-                                                        <td colspan="2">
-                                                            <span class="text-muted">Total Price</span>
-                                                            <% let total=user.orders.reduce((accumulator, order)=>
-                                                                {%>
-                                                                <% return accumulator + order.totalamount %>
-                                                                    <% }, 0) %>
-                                                                        <% let totalQan=user.orders.reduce((accumulator,
-                                                                            order)=> {%>
-
-                                                                            <% return accumulator +
-                                                                                order.productquantity %>
-                                                                                <% }, 0) %>
-                                                                                    <strong>₹ <%= total - (totalQan*69)
-                                                                                            %>
-                                                                                    </strong>
+                                                        <td class="font-semibold text-lg"
+                                                            style="vertical-align: middle;">
+                                                            <%= order.productId.name %>
                                                         </td>
-                                                        <td colspan="2">
-                                                            <span class="text-muted">Total Paid</span>
-                                                            <strong>₹ <%= total - (totalQan*69) %></strong>
+                                                        <td style="vertical-align: middle;">
+                                                            ₹<%= order.productId.price - 69 %>
+                                                        </td>
+                                                        <td style="vertical-align: middle;">
+                                                            ₹100 X <%= order.productquantity %>
+                                                        </td>
+                                                        <td style="vertical-align: middle;">
+                                                            <strong>₹<%= order.productquantity * (order.productId.price
+                                                                    - 69) %></strong>
+                                                        </td>
+                                                        <td style="vertical-align: middle;">
+                                                            <span class="badge badge-success">
+                                                                <%= new
+                                                                    Date(order.dateAdded).toISOString().split('T')[0] %>
+                                                            </span>
                                                         </td>
                                                     </tr>
+                                                    <% } else { %>
+                                                        <tr>
+                                                            <td colspan="6" class="text-muted">
+                                                                Product information is unavailable.
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% }) %>
+                                                                <tr>
+                                                                    <th colspan="2">
+                                                                        <span>Status:</span>
+                                                                        <% if(user.orders[0]){ %>
+                                                                            <span
+                                                                                class="badge badge-success">PAID</span>
+                                                                            <% } %>
+                                                                    </th>
+                                                                    <td colspan="2">
+                                                                        <span class="text-muted">Total Price</span>
+                                                                        <% let total=user.orders.reduce((accumulator,
+                                                                            order)=>
+                                                                            { return accumulator + order.totalamount; },
+                                                                            0); let
+                                                                            totalQan = user.orders.reduce((accumulator,
+                                                                            order) =>
+                                                                            { return accumulator +
+                                                                            order.productquantity; }, 0);
+                                                                            %>
+                                                                            <strong>₹ <%= total - (totalQan * 69) %>
+                                                                            </strong>
+                                                                    </td>
+                                                                    <td colspan="2">
+                                                                        <span class="text-muted">Total Paid</span>
+                                                                        <strong>₹ <%= total - (totalQan * 69) %>
+                                                                        </strong>
+                                                                    </td>
+                                                                </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
 
-                            <div id="addressBook" class="card" style="display: none;">
-                            </div>
-
-
+                            <div id="addressBook" class="card" style="display: none;"></div>
                         </div>
                     </div>
                 </div>
